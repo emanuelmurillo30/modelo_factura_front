@@ -10,7 +10,7 @@
 
           <q-card-section>
             <div class="row text-blue-grey-7">
-              <!-- TOTAL A PAGAR -->
+              <!-- TOTAL A PAGAR PARA EL CLIENTE-->
               <div class="col-4">
                 <div class="text-h6">
                   Total en bolivares:
