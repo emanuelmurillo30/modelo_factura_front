@@ -23,6 +23,7 @@
     "express": "^4.19.2",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
+    "loader-utils": "^3.3.1",
     "postcss": "^8.4.38",
     "qrcode.vue": "^3.3.3",
     "quasar": "2.10.0",
