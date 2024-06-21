@@ -19,7 +19,14 @@ import RootComponent from 'app/src/App.vue'
 import createRouter from 'app/src/router/index'
 
 
+// Define la función de transformación
+function importTransformation(data) {
+  // Aquí va tu código de transformación
+  return data; // modificado según necesites
+}
 
+// Usar la función en alguna parte de app.js
+const result = importTransformation(someData);
 
 
 export default async function (createAppFn, quasarUserOptions) {
