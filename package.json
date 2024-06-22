@@ -17,6 +17,7 @@
     "core-js": "^3.21.0",
     "dinero.js": "^1.9.1",
     "dotenv": "^16.0.3",
+    "express": "^4.19.2",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "loader-utils": "^3.3.1",
