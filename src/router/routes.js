@@ -16,17 +16,6 @@ const routes = [
         props: true,
       },
       {
-        path: "/ordenesDeTrabajo",
-        name: "OrdenesTrabajo",
-        component: () => import("pages/Ordenes-trabajo.vue"),
-      },
-      {
-        path: "/ordenTrabajoDet/:id?",
-        name: "OrdenesTrabajoDetalle",
-        component: () => import("pages/Ordenes-trabajo-detalle.vue"),
-        props: true,
-      },
-      {
         path: "/facturacionPart",
         name: "FacturacionParticular",
         component: () => import("pages/Facturacion-particular.vue"),

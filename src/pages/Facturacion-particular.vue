@@ -185,7 +185,7 @@ import { ref } from "vue";
 import ModalExamenesParticulares from "../components/ModalExamenesParticulares.vue";
 import ClienteNuevo from "../components/ClienteModalCreacion.vue";
 import ModalPagos from "../components/ModalPagos.vue";
-import FacturaOrdenTrabajo from "../components/PdfOrdenTrabajo.vue";
+//import FacturaOrdenTrabajo from "../components/PdfOrdenTrabajo.vue";
 import FacturaSerieA from "../components/PdfFacturacionSerieA.vue";
 import FacturaSeguro from "../components/PdfFacturacionSeguro.vue";
 
@@ -195,7 +195,6 @@ export default {
     ClienteNuevo,
     ModalPagos,
     FacturaSeguro,
-    FacturaOrdenTrabajo,
     FacturaSerieA,
   },
 

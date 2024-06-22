@@ -279,9 +279,9 @@
 import axios from "axios";
 import { ref } from "vue";
 import ModalPagos from "../components/ModalPagos.vue";
-import ModalPagosNotas from "../components/ModalPagosNotas.vue";
-import PdfReciboPagoCredito from "../components/PdfReciboPagoCredito.vue";
-import PdfNotaCredito from "../components/PdfNotaCredito.vue";
+//import ModalPagosNotas from "../components/ModalPagosNotas.vue";
+//import PdfReciboPagoCredito from "../components/PdfReciboPagoCredito.vue";
+//import PdfNotaCredito from "../components/PdfNotaCredito.vue";
 import FacturaSerieA from "../components/PdfFacturacionSerieA.vue";
 
 export default {
@@ -289,9 +289,6 @@ export default {
 
   components: {
     ModalPagos,
-    ModalPagosNotas,
-    PdfReciboPagoCredito,
-    PdfNotaCredito,
     FacturaSerieA,
   },
 
