@@ -9,7 +9,7 @@
     "lint": "eslint --ext .js,.vue ./",
     "build": "quasar build",
     "start": "node server.js",
-    "heroku-postbuild": "npm i && npm run build"
+    "heroku-postbuild": "npm install && npm run build"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
