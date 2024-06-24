@@ -185,15 +185,6 @@
                       @click="agregarCultivo()"
                       icon="add"
                     />
-
-                    <!-- BOTON AGREGAR PERFIL -->
-                    <q-btn
-                      color="secondary"
-                      text-color="accent"
-                      label="Perfil"
-                      @click="agregarPerfil()"
-                      icon="add"
-                    />
                   </template>
 
                   <template v-slot:body="props">
@@ -238,14 +229,8 @@
 
                   <template v-slot:bottom-row>
                     <q-tr colspan="100%">
-                      <q-td class="text-right">
+                      <q-td class="text-left">
                         Subtotal del paciente Bs.: {{ subtotalTablaBs }}
-                      </q-td>
-                      <q-td class="text-right">
-                        Subtotal del paciente COP: {{ subtotalTablaPesos }}
-                      </q-td>
-                      <q-td class="text-right">
-                        Subtotal del paciente $: {{ subtotalTablaDolares }}
                       </q-td>
                     </q-tr>
                   </template>
@@ -295,10 +280,6 @@
                 <q-card class="my-card">
                   <div class="row q-py-sm q-pl-sm">
                     <div class="col-4">Subtotal Bs.: {{ subtotalBs }}</div>
-                    <div class="col-4">Subtotal Pesos: {{ subtotalPesos }}</div>
-                    <div class="col-4">
-                      Subtotal Dolares: {{ this.totalDolares }}
-                    </div>
                   </div>
                 </q-card>
               </div>
@@ -485,69 +466,6 @@
                     />
                   </div>
                 </div>
-              </q-card-section>
-            </q-card>
-          </q-dialog>
-
-          <!-- MODAL AGREGAR PERFIL -->
-          <q-dialog v-model="modalPerfiles" full-width>
-            <q-card>
-              <q-card-section class="q-pb-sm">
-                <!-- TABLA QUE MUESTRA TODAS LAS PRUEBAS -->
-                <q-table
-                  title="Agregar perfil"
-                  :rows="rows_perfiles"
-                  :columns="columns_perfiles"
-                  :pagination="initialPagination"
-                  :loading="carga"
-                  row-key="perfil_nombre"
-                  selection="multiple"
-                  v-model:selected="selected"
-                  :filter="filterPerfiles"
-                >
-                  <template v-slot:top-right>
-                    <!-- BARRA DE BUSQUEDA -->
-                    <q-input
-                      outlined
-                      dense
-                      debounce="300"
-                      v-model="filterPerfiles"
-                      placeholder="Buscar"
-                      class="q-mr-xl"
-                    >
-                      <template v-slot:append>
-                        <q-icon name="search" />
-                      </template>
-                    </q-input>
-
-                    <!-- BOTON CIERRE MODAL -->
-                    <q-btn
-                      class="q-ml-xl"
-                      icon="close"
-                      flat
-                      round
-                      dense
-                      v-close-popup
-                    />
-                  </template>
-
-                  <!--SECCION BOTONES OPCIONES -->
-                  <template v-slot:body-cell-actions="opt">
-                    <q-td :props="opt">
-                      <!--BOTON AGREGAR PRUEBA AL EXAMEN -->
-                      <q-btn
-                        padding="md"
-                        dense
-                        round
-                        flat
-                        color="grey"
-                        @click="addPerfil(opt.row.id_perfil)"
-                        icon="done"
-                      >
-                      </q-btn>
-                    </q-td>
-                  </template>
-                </q-table>
               </q-card-section>
             </q-card>
           </q-dialog>
@@ -814,7 +732,6 @@ export default {
     let examenNoExiste = ref(false);
     let modalExamenes = ref(false);
     let modalCultivos = ref(false);
-    let modalPerfiles = ref(false);
     let modalPacientes = ref(false);
     let faltaTipoDocumento = ref(false);
     let modalExiste = ref(false);
@@ -830,7 +747,6 @@ export default {
     const rows = ref([]);
     let rows_examenes = ref([]);
     let rows_cultivos = ref([]);
-    let rows_perfiles = ref([]);
     let rows_pacientes = ref([]);
     const selected = ref([]);
     const aux_pacientes = ref([]);
@@ -930,17 +846,6 @@ export default {
       { name: "actions", label: "Opciones", field: "", align: "center" },
     ];
 
-    const columns_perfiles = [
-      {
-        name: "perfil_nombre",
-        align: "center",
-        label: "Nombre de perfil",
-        field: "perfil_nombre",
-        sortable: true,
-      },
-      { name: "actions", label: "Opciones", field: "", align: "center" },
-    ];
-
     const columns_aux_pacientes = [
       {
         name: "cedula_paciente",
@@ -1019,17 +924,6 @@ export default {
           aux_examenes_cultivos.value
         );
         console.log("LOS CULTIVOS", rows_cultivos.value);
-      })
-      .finally(() => {
-        carga.value = false;
-      });
-
-    // SE TRAE LA LISTA DE PERFILES //
-    axios
-      .get(ip + "perfiles")
-      .then((response) => {
-        rows_perfiles.value = response.data;
-        console.log("LOS PERFILES", rows_perfiles.value);
       })
       .finally(() => {
         carga.value = false;
@@ -1895,19 +1789,16 @@ export default {
       rows,
       rows_examenes,
       rows_cultivos,
-      rows_perfiles,
       rows_pacientes,
       columns,
       columns_examenes,
       columns_cultivos,
-      columns_perfiles,
       columns_pacientes,
       columns_aux_pacientes,
       carga,
       selected,
       filterExamenes: ref(""),
       filterCultivos: ref(""),
-      filterPerfiles: ref(""),
       filterPacientes: ref(""),
       addExamen,
       addExamenes,
@@ -1916,7 +1807,6 @@ export default {
       buscarExamenCultivo,
       modalExamenes,
       modalCultivos,
-      modalPerfiles,
       modalPacientes,
       modalExiste,
       modalFaltaPaciente,
@@ -1962,40 +1852,8 @@ export default {
       this.modalCultivos = true;
     },
 
-    agregarPerfil() {
-      this.modalPerfiles = true;
-    },
-
     agregarPaciente() {
       this.modalPacientes = true;
-    },
-
-    // AGREGA UN SOLO EXAMEN A LA LISTA DE EXAMENES Y CULTIVOS //
-    async addPerfil(perfil_id) {
-      let perfil = {
-        id_perfil: perfil_id,
-      };
-      console.log(perfil);
-      let examenes = await axios.post(this.ip + "perfilExamenes", perfil);
-      console.log("los examenes del perfil", examenes);
-
-      //this.rows = [...this.rows, ...examenes.data];
-
-      for (let i = 0; i < examenes.data.length; i++) {
-        this.rows = [
-          ...this.rows,
-          {
-            id_examen: examenes.data[i].id_examen,
-            codigo: examenes.data[i].examen_codigo,
-            nombre: examenes.data[i].examen_nombre,
-            precio: examenes.data[i].examen_precio,
-          },
-        ];
-      }
-
-      this.selected = [];
-      this.filterPerfiles = "";
-      this.modalPerfiles = false;
     },
 
     // AGREGA UN PACIENTE Y SUS EXAMENES/CULTIVOS AL ARREGLO AUXILIAR
