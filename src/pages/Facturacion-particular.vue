@@ -425,7 +425,7 @@ export default {
               }
             }
 
-            this.countDownTimer();
+            //this.countDownTimer();
           }
         });
     },

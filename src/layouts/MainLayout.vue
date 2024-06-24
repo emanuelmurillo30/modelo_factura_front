@@ -73,11 +73,6 @@ const linksList = [
         icon: "description",
         link: "/Facturas",
       },
-      {
-        title: "Ordenes de trabajo",
-        icon: "receipt_long",
-        link: "/ordenesDeTrabajo",
-      },
     ],
   },
   {

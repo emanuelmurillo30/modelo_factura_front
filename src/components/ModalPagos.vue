@@ -17,15 +17,6 @@
                   {{ getBsFijo }}
                 </div>
               </div>
-              <div class="col-4">
-                <div class="text-h6">Total en pesos: {{ getPesosFijo }}</div>
-              </div>
-              <div class="col-3">
-                <div class="text-h6">
-                  Total en dolares:
-                  {{ totalDolares }}
-                </div>
-              </div>
             </div>
 
             <div class="row">
@@ -33,17 +24,6 @@
               <div class="col-4">
                 <div class="text-h5 text-weight-medium text-primary">
                   Subtotal en bolivares: {{ getBs }}
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="text-h5 text-weight-medium text-primary">
-                  Subtotal en pesos: {{ getPesos }}
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="text-h5 text-weight-medium text-primary">
-                  Subtotal en dolares:
-                  {{ getDolares }}
                 </div>
               </div>
             </div>
@@ -60,29 +40,11 @@
                 <div class="col-4">
                   <div class="text-h6">IGTF en bolivares: {{ getIgtfBs }}</div>
                 </div>
-                <div class="col-4">
-                  <div class="text-h6">IGTF en pesos: {{ getIgtfPesos }}</div>
-                </div>
-                <div class="col-3">
-                  <div class="text-h6">
-                    IGTF en dolares:
-                    {{ getIgtfDolares }}
-                  </div>
-                </div>
               </div>
               <div class="row text-grey-7" v-else>
                 <!--IGTF A PAGAR -->
                 <div class="col-4">
                   <div class="text-h6">IGTF en bolivares: {{ getIgtfBs }}</div>
-                </div>
-                <div class="col-4">
-                  <div class="text-h6">IGTF en pesos: {{ getIgtfPesos }}</div>
-                </div>
-                <div class="col-3">
-                  <div class="text-h6">
-                    IGTF en dolares:
-                    {{ getIgtfDolares }}
-                  </div>
                 </div>
               </div>
             </template>
@@ -92,17 +54,6 @@
               <div class="col-4">
                 <div class="text-h6">
                   Vueltos en bolivares: {{ getVueltosBs }}
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="text-h6">
-                  Vueltos en pesos: {{ getVueltosPesos }}
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="text-h6">
-                  Vueltos en dolares:
-                  {{ getVueltosDolares }}
                 </div>
               </div>
             </div>

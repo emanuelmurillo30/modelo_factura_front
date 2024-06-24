@@ -1,5 +1,5 @@
 <template>
-  <q-page padding v-if="this.getAcceso == 1">
+  <q-page padding>
     <div class="fit row justify-center">
       <div class="col-10" v-show="factura">
         <!-- CARD MODIFICACION DE PRUEBAS -->
@@ -10,24 +10,6 @@
                 <p class="text-h6 q-mb-none q-mt-xs">Detalles de factura</p>
               </div>
               <div class="col-8 text-right align-center">
-                <q-btn
-                  color="primary"
-                  label="Nota a crédito"
-                  @click="crearNotaCredito"
-                  v-if="
-                    (this.rol == 5 || this.rol == 6) && this.status != 'ANULADO'
-                  "
-                  class="q-mr-md"
-                />
-                <q-btn
-                  color="primary"
-                  label="Anular factura"
-                  @click="modalAnular"
-                  v-if="
-                    (this.rol == 5 || this.rol == 6) && this.status != 'ANULADO'
-                  "
-                  class="q-mr-md"
-                />
                 <q-btn
                   color="primary"
                   label="Reimprimir factura"
@@ -125,29 +107,7 @@
               :loading="carga"
               no-data-label="No hay pagos disponibles"
             >
-              <template v-slot:top-right>
-                <!-- BOTON MODIFICAR PAGOS -->
-                <q-btn
-                  class="q-ml-xl"
-                  color="primary"
-                  label="Modificar pagos"
-                  @click="modificarPagos"
-                  v-if="this.rol == 6 && this.rows_pagos.length!=0"
-                >
-                </q-btn>
 
-                <!-- BOTON AGREGAR PAGO -->
-                <q-btn
-                  v-if="
-                    this.tipo == 'CREDITO' && (this.rol == 5 || this.rol == 6)
-                  "
-                  class="q-ml-xl"
-                  color="primary"
-                  label="Agregar pago"
-                  @click="agregarPagos"
-                >
-                </q-btn>
-              </template>
             </q-table>
           </q-card-section>
 
@@ -219,18 +179,6 @@
       @cancelarPagos="onCancelarPagos"
     ></ModalPagos>
 
-    <!-- MODAL DE PAGOS PARA CREAR UNA NOTA A CREDITO/DEBITO -->
-    <ModalPagosNotas
-      v-if="modal_pagos_notas"
-      :totalDolares="this.totalDolares + this.igtf_dolares"
-      :cambioPesosArreglado="this.cambio_pesos_factura"
-      :cambioBs="this.cambio_bs"
-      :idFactura="this.id"
-      :examCultArray="this.examCultArray"
-      @finalizarPagos="onAgregarPagos"
-      @cancelarPagos="onCancelarPagosNotas"
-    ></ModalPagosNotas>
-
     <PdfNotaCredito v-if="pdf_nc" :recibo="this.recibo"> </PdfNotaCredito>
 
     <!-- MODAL DE FACTURA SERIE A -->
@@ -247,41 +195,12 @@
     >
     </factura-serie-a>
   </q-page>
-
-  <q-page padding v-else-if="this.getAcceso == 0">
-    <div class="fit row justify-center text-center">
-      <div class="col-5">
-        <div class="q-pa-md">
-          <q-card>
-            <q-card-section class="row items-center justify-center q-ma-md">
-              <div class="col-12">
-                <q-avatar icon="close" color="red-14" text-color="white" />
-              </div>
-              <div class="col-12 q-mt-sm">
-                <div class="text-h5">¡ADVERTENCIA!</div>
-              </div>
-            </q-card-section>
-            <q-card-section>
-              <div class="text-h6 q-mb-md">
-                No tiene permitido entrar a esta seccion.
-              </div>
-            </q-card-section>
-          </q-card>
-        </div>
-      </div>
-    </div>
-  </q-page>
-
-  <q-page padding v-else> </q-page>
 </template>
 
 <script>
 import axios from "axios";
 import { ref } from "vue";
 import ModalPagos from "../components/ModalPagos.vue";
-//import ModalPagosNotas from "../components/ModalPagosNotas.vue";
-//import PdfReciboPagoCredito from "../components/PdfReciboPagoCredito.vue";
-//import PdfNotaCredito from "../components/PdfNotaCredito.vue";
 import FacturaSerieA from "../components/PdfFacturacionSerieA.vue";
 
 export default {
@@ -575,7 +494,7 @@ export default {
         this.$router.go();
       }
     },
-    
+
     // CANCELAR //
     onCancel() {
       this.$router.push("/Facturas");
@@ -755,39 +674,13 @@ export default {
 
       this.pdfSerieA = true;
     },
-
-    validar() {
-      let usuario = {
-        id_usuario: parseInt(localStorage.id),
-        id_rol: parseInt(localStorage.rol),
-        id_tarea: 50,
-        token: localStorage.token,
-      };
-
-      axios.post(this.ip + "accesoAControladores", usuario).then((response) => {
-        console.log("EL RESPONSE", response.data);
-
-        if (response.data == "x") {
-          localStorage.clear();
-          window.location = "/";
-        } else {
-          this.acceso = response.data;
-        }
-      });
-    },
   },
 
   created() {
-    this.validar();
     this.getDivisas();
   },
 
   computed: {
-    getAcceso() {
-      console.log("ela", this.acceso);
-      return this.acceso;
-    },
-
     getTotalBs() {
       return Number(Math.round(this.totalBs + "e+2") + "e-2");
     },
