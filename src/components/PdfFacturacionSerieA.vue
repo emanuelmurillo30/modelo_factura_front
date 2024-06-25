@@ -243,15 +243,6 @@
                     Descuento $: {{ this.descuentoDolares }}
                   </div>
                   <div class="col-12 low-height">
-                    Valor total de la venta $: {{ this.valorTotalVentaDolares }}
-                  </div>
-                  <div class="col-12 low-height">
-                    Base imponible IGTF 3% $: {{ this.baseImponibleDolares }}
-                  </div>
-                  <div class="col-12 low-height">
-                    IGTF percibido 3% $: {{ this.igtfDolares }}
-                  </div>
-                  <div class="col-12 low-height">
                     Total a pagar $: {{ this.totalPagarDolares }}
                   </div>
                 </div>
@@ -262,15 +253,6 @@
                 </div>
                 <div class="col-12 low-height">
                   Descuento Bs: {{ this.descuentoBs }}
-                </div>
-                <div class="col-12 low-height">
-                  Valor total de la venta Bs: {{ this.valorTotalVentaBs }}
-                </div>
-                <div class="col-12 low-height">
-                  Base imponible IGTF 3% Bs: {{ this.baseImponibleBs }}
-                </div>
-                <div class="col-12 low-height">
-                  IGTF percibido 3% Bs: {{ this.igtfBs }}
                 </div>
                 <div class="col-12 low-height">
                   Total a pagar Bs: {{ this.totalPagarBs }}

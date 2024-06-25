@@ -28,27 +28,6 @@
               </div>
             </div>
 
-            <template
-              v-if="
-                this.idTipoFactura != 3 &&
-                this.idTipoFactura != 4 &&
-                this.idTipoFactura != 5
-              "
-            >
-              <div class="row" v-if="this.igtf === false">
-                <!--IGTF A PAGAR -->
-                <div class="col-4">
-                  <div class="text-h6">IGTF en bolivares: {{ getIgtfBs }}</div>
-                </div>
-              </div>
-              <div class="row text-grey-7" v-else>
-                <!--IGTF A PAGAR -->
-                <div class="col-4">
-                  <div class="text-h6">IGTF en bolivares: {{ getIgtfBs }}</div>
-                </div>
-              </div>
-            </template>
-
             <div class="row">
               <!-- VUELTOS A PAGAR -->
               <div class="col-4">
@@ -167,12 +146,7 @@
                     false-value="0"
                     q-pb-none
                   />
-                  <q-checkbox
-                    v-model="pago.igtf_pago"
-                    label="IGTF"
-                    true-value="1"
-                    false-value="0"
-                  />
+
                 </div>
                 <div class="col-2 self-center text-right">
                   <q-btn
@@ -285,33 +259,6 @@
       </q-card>
     </q-dialog>
 
-    <!-- MODAL VERIFICACION PAGO TOTAL -->
-    <q-dialog
-      v-model="modalMalIGTF"
-      persistent
-      transition-show="scale"
-      transition-hide="scale"
-    >
-      <q-card>
-        <q-card-section class="row items-center q-ma-md">
-          <q-avatar icon="warning" color="amber-14" text-color="grey-10" />
-          <span class="q-ml-sm">
-            <div class="text-subtitle1">El el monto de igtf es incorrecto.</div>
-          </span>
-        </q-card-section>
-
-        <q-card-actions align="center" class="q-mb-md">
-          <!-- ACEPTAR -->
-          <q-btn
-            unelevated
-            label="Aceptar"
-            color="primary"
-            class="q-mr-md"
-            @click="this.modalMalIGTF = false"
-          />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
   </q-page>
 </template>
 
