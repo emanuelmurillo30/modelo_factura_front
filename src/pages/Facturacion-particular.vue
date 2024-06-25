@@ -379,7 +379,7 @@ export default {
       let usuario = parseInt(localStorage.id);
 
       let factura = {
-        id_usuario: usuario,
+        id_usuario: 1,
         id_cliente: this.idCliente,
         total_bolivares: e[0].total_bolivares_descuento,
         total_dolares: this.total_dolares_descuento,
